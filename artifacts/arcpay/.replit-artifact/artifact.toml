@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "ArcPay"
+version = "1.0.0"
+id = "artifacts/arcpay"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24233
+
+[services.development]
+run = "pnpm --filter @workspace/arcpay run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/arcpay", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/arcpay/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24233"
+BASE_PATH = "/"
