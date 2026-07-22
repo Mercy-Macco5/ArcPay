@@ -23,11 +23,10 @@ export default function LandingPage() {
               <img src="/arcpay-logo.png" alt="ArcPay" className="h-20 w-20 object-contain" />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-foreground mb-6 leading-[1.1]">
-              Get paid in USDC with one simple link.
+              Get paid in USDC with a single link.
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              Create a payment link, share it with anyone, and get paid effortlessly with ArcPay.
-              The most elegant way to accept crypto payments.
+              Create a payment link in seconds, share it with anyone, and receive USDC without the complexity of wallet addresses.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -43,7 +42,7 @@ export default function LandingPage() {
                 className="w-full sm:w-auto px-8 py-3.5 bg-white/[0.03] text-foreground font-medium rounded-lg border border-white/[0.08] hover:bg-white/[0.06] transition-all flex items-center justify-center gap-2"
                 data-testid="link-hero-demo"
               >
-                View Demo
+                See How It Works
               </Link>
             </div>
           </motion.div>
@@ -63,8 +62,8 @@ export default function LandingPage() {
             />
             <FeatureCard
               icon={Shield}
-              title="Modern infrastructure"
-              description="Powered by robust payment rails built for reliability, speed, and security."
+              title="Cross-chain Ready"
+              description="Built for seamless USDC payments across supported chains with Arc."
               delay={0.3}
             />
           </div>
@@ -83,8 +82,9 @@ export default function LandingPage() {
               
               {[
                 { step: 1, title: 'Create a payment link', desc: 'Enter the amount and your wallet address.' },
-                { step: 2, title: 'Share the link', desc: 'Send it to your client or friend anywhere.' },
-                { step: 3, title: 'Get paid', desc: 'They pay with a few clicks. You get USDC instantly.' }
+                { step: 2, title: 'Share the link', desc: 'Send it to your client anywhere.' },
+                { step: 3, title: 'They pay', desc: 'They complete the payment using USDC.' },
+                { step: 4, title: 'Get paid', desc: 'Receive funds directly in your wallet.' }
               ].map((item, i) => (
                 <div key={item.step} className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:justify-between relative">
                   <div className={`flex flex-row items-center gap-6 sm:w-1/2 ${i % 2 !== 0 ? 'md:order-2 md:justify-start' : 'md:justify-end'}`}>
