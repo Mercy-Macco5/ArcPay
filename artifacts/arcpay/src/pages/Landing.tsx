@@ -19,6 +19,9 @@ export default function LandingPage() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
             className="text-center max-w-3xl mx-auto mb-16"
           >
+            <div className="flex justify-center mb-6">
+              <img src="/arcpay-logo.png" alt="ArcPay" className="h-20 w-20 object-contain" />
+            </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-foreground mb-6 leading-[1.1]">
               Get paid in USDC with one simple link.
             </h1>

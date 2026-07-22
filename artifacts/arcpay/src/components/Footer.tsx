@@ -4,6 +4,10 @@ export function Footer() {
   return (
     <footer className="w-full py-8 mt-auto border-t border-white/[0.04] bg-background">
       <div className="container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground">
+        <div className="flex items-center gap-2 mb-4 sm:mb-0">
+          <img src="/arcpay-logo.png" alt="ArcPay" className="h-6 w-6 object-contain" />
+          <span className="font-semibold text-foreground">ArcPay</span>
+        </div>
         <p>
           Built by{' '}
           <a
