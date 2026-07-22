@@ -20,10 +20,10 @@ export default function LandingPage() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-foreground mb-6 leading-[1.1]">
-              Request USDC with a simple link.
+              Get paid in USDC with one simple link.
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              Create a payment link, share it with anyone, and get paid effortlessly. 
+              Create a payment link, share it with anyone, and get paid effortlessly with ArcPay.
               The most elegant way to accept crypto payments.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
