@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Copy, Check, ExternalLink } from 'lucide-react';
 import { MOCK_PAYMENT } from '../lib/mockData';
+import { PaymentLink } from '../types';
 import { StatusBadge } from './StatusBadge';
 import { Link, useLocation } from 'wouter';
 
-export function PaymentCard() {
+interface PaymentCardProps {
+  payment?: PaymentLink;
+}
+
+export function PaymentCard({ payment: paymentProp }: PaymentCardProps = {}) {
   const [copied, setCopied] = useState(false);
   const [, setLocation] = useLocation();
-  const payment = MOCK_PAYMENT;
+  const payment = paymentProp ?? MOCK_PAYMENT;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(payment.walletAddress);

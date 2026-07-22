@@ -7,3 +7,8 @@ export interface PaymentLink {
   reason?: string;
   chain: Chain;
 }
+
+export interface StoredPaymentLink extends PaymentLink {
+  id: string;
+  createdAt: number;
+}

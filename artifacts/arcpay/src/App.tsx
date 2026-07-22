@@ -7,6 +7,8 @@ import NotFound from '@/pages/not-found';
 import LandingPage from './pages/Landing';
 import CreatePaymentLink from './pages/Create';
 import PayDemo from './pages/PayDemo';
+import Pay from './pages/Pay';
+import LinkCreated from './pages/LinkCreated';
 import SuccessPage from './pages/Success';
 
 const queryClient = new QueryClient();
@@ -17,6 +19,8 @@ function Router() {
       <Route path="/" component={LandingPage} />
       <Route path="/create" component={CreatePaymentLink} />
       <Route path="/pay/demo" component={PayDemo} />
+      <Route path="/pay/:id" component={Pay} />
+      <Route path="/pay-created/:id" component={LinkCreated} />
       <Route path="/success" component={SuccessPage} />
       <Route component={NotFound} />
     </Switch>

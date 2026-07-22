@@ -4,6 +4,7 @@ import { Link, useLocation } from 'wouter';
 import { ArrowLeft } from 'lucide-react';
 import { FormField } from '../components/FormField';
 import { Chain } from '../types';
+import { saveLink } from '../lib/store';
 
 export default function CreatePaymentLink() {
   const [, setLocation] = useLocation();
@@ -17,9 +18,14 @@ export default function CreatePaymentLink() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, we would save this data or encode it in the URL
-    // For this mock, we just navigate to the demo page
-    setLocation('/pay/demo');
+    const stored = saveLink({
+      name: formData.name,
+      walletAddress: formData.walletAddress,
+      amount: parseFloat(formData.amount),
+      reason: formData.reason || undefined,
+      chain: formData.chain,
+    });
+    setLocation(`/pay-created/${stored.id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
