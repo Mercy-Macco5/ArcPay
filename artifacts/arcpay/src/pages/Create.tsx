@@ -6,6 +6,9 @@ import { FormField } from '../components/FormField';
 import { Chain } from '../types';
 import { saveLink } from '../lib/store';
 
+const isValidEVMAddress = (address: string): boolean =>
+  /^0x[0-9a-fA-F]{40}$/.test(address);
+
 export default function CreatePaymentLink() {
   const [, setLocation] = useLocation();
   const [formData, setFormData] = useState({
@@ -15,12 +18,18 @@ export default function CreatePaymentLink() {
     reason: '',
     chain: 'Base' as Chain,
   });
+  const [walletTouched, setWalletTouched] = useState(false);
+
+  const walletValue = formData.walletAddress.trim();
+  const walletValid = isValidEVMAddress(walletValue);
+  const showWalletError = walletTouched && walletValue.length > 0 && !walletValid;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!walletValid) return;
     const stored = saveLink({
       name: formData.name,
-      walletAddress: formData.walletAddress,
+      walletAddress: walletValue,
       amount: parseFloat(formData.amount),
       reason: formData.reason || undefined,
       chain: formData.chain,
@@ -30,7 +39,9 @@ export default function CreatePaymentLink() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Auto-trim wallet address
+    const sanitized = name === 'walletAddress' ? value.trimStart() : value;
+    setFormData((prev) => ({ ...prev, [name]: sanitized }));
   };
 
   return (
@@ -67,15 +78,23 @@ export default function CreatePaymentLink() {
               data-testid="input-name"
             />
 
-            <FormField
-              label="Wallet Address"
-              name="walletAddress"
-              placeholder="0x..."
-              value={formData.walletAddress}
-              onChange={handleChange}
-              required
-              data-testid="input-wallet"
-            />
+            <div className="flex flex-col gap-1.5">
+              <FormField
+                label="Wallet Address"
+                name="walletAddress"
+                placeholder="0x..."
+                value={formData.walletAddress}
+                onChange={handleChange}
+                onBlur={() => setWalletTouched(true)}
+                required
+                data-testid="input-wallet"
+              />
+              {showWalletError && (
+                <p className="text-xs text-red-400" data-testid="error-wallet">
+                  Please enter a valid EVM wallet address.
+                </p>
+              )}
+            </div>
 
             <div className="grid grid-cols-2 gap-4">
               <FormField
@@ -130,7 +149,8 @@ export default function CreatePaymentLink() {
 
             <button
               type="submit"
-              className="w-full mt-4 py-3 px-4 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 shadow-[0_0_20px_-5px_rgba(99,102,241,0.3)]"
+              disabled={!walletValid}
+              className="w-full mt-4 py-3 px-4 bg-primary text-white font-medium rounded-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_-5px_rgba(99,102,241,0.3)] enabled:hover:bg-primary/90 enabled:hover:scale-[1.01] enabled:active:scale-[0.99] disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
               data-testid="button-generate"
             >
               Generate Payment Link
